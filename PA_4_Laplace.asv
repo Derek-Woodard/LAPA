@@ -1,0 +1,56 @@
+%% Laplace Equation by Iteration
+% familiarize ourselves wit hthe finite difference modeling of the Laplace
+% equation in 2D and its solution by iteration
+
+%% 
+% Basic formulation
+% Write out the finite difference form of Laplace's equation
+
+
+% Write the equation in a form that acn be solved by iteration
+
+
+% How to handle B.C.s
+
+
+%%
+% formulate a 2D Laplace solver using iteration
+% set initial B.C.s to be 1 on the left, 0 on the right, and 0 on
+% top/bottom
+
+% one loop around whole thing
+% can use either two loops or logical indexing for inner nodes
+
+k = 1.38064852e-23;
+q = 1.60217662e-19;
+del = 1e-9;
+
+nx = 100;
+ny = 100;
+
+bctop = 0;
+bcbottom = 0;
+bcleft = 1;
+bcright = 0;
+
+V = zeros(nx, ny);
+
+iter = 500;
+
+for i = 1:iter
+    V(1,:) = bcleft;
+    V(nx,:) = bcright;
+    V(:,1) = bctop;
+    V(:,ny) = bcbottom;
+    
+    for j = 1:nx
+        for k = 1:ny
+            if (j ~= 1) && (j ~= nx) && (k ~= 1) && (k ~= ny)
+                V(j,k) = ((q/k)*(del^2))+((V(j,k+1) + V(j,k-1) + V(j+1,k) + V(j-1,k))/4);
+            end               
+        end
+    end
+    
+    [X,Y] = m
+    
+end
